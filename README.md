@@ -25,3 +25,7 @@ https://stackoverflow.com/questions/39826992/how-can-i-set-a-cookie-in-react
 ## React IFrames
 
 https://blog.logrocket.com/best-practices-react-iframes/
+
+### POC
+
+Pull UUID from URL using react then pass the value to a REST API call to get the URL for the IFRAME.
