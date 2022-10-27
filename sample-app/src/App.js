@@ -2,17 +2,38 @@ import './App.css';
 
 import React from 'react';
 import Cookies from 'universal-cookie';
-import { useState } from 'react';
+import { useState, useEffect } from 'react'
+
+//import axios from 'axios'
 
 const cookies = new Cookies();
 
 const uid = 'f3962f6d-ffe3-440f-bb1c-eef002ab5e66';
+
+const getUrl_uri = 'http://127.0.0.1:8088/6f7e6060-1e45-4fd1-9ff5-b5d6da9b8c64/singledomain/geturl/';
 
 //var createReactClass = require('create-react-class');
 
 function App() {
 
   const [userid, setUserId] = useState(cookies.get(uid));
+
+  const [theurl, setURL] = useState([]);
+
+  //const [error, setError] = useState(null);
+
+  const fetchData = async ()=>{
+    
+    let res = await fetch(getUrl_uri);
+    let data = await res.json();
+    setURL(data);
+    
+    }
+
+
+  useEffect(() => {
+    fetchData()
+  }, []);
 
   const handleLoginClick = (e) => {
     e.preventDefault();
@@ -36,9 +57,19 @@ function App() {
     html_goes_here = <div></div>;
   }
 
+  //if (error) return <p>An error occurred</p>
+
+  // theurl.response['singledomain.geturl'].url
+
   return (
     <div className="App">
       <header className="App-header">
+        <small><b>theurl:</b>&nbsp;
+        {
+            theurl.response && theurl.response['singledomain.geturl'].url
+        }        
+        </small>
+        <br />
         {button_goes_here}
         <br />
         {html_goes_here}
